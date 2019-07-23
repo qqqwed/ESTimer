@@ -17,6 +17,7 @@ use EasySwoole\Component\Pool\PoolManager;
 use EasySwoole\EasySwoole\Crontab\Crontab;
 use EasySwoole\EasySwoole\Swoole\EventRegister;
 use EasySwoole\EasySwoole\AbstractInterface\Event;
+use EasySwoole\FastCache\Cache;
 use EasySwoole\Http\Request;
 use EasySwoole\Http\Response;
 
@@ -26,6 +27,12 @@ class EasySwooleEvent implements Event
     public static function initialize()
     {
         date_default_timezone_set('Asia/Shanghai');
+        include_once EASYSWOOLE_ROOT.'/App/helper.php';
+        /**
+         * **************** 加载定时器管理配置文件 ****************
+         */
+        Config::getInstance()->loadFile(EASYSWOOLE_ROOT.'/timerConf.php', true);
+
 		/**
 		 * **************** MYSQL CONFIG ****************
 		 */
@@ -37,6 +44,7 @@ class EasySwooleEvent implements Event
 		}
 		//设置其他参数
 		$mysqlConf->setMaxObjectNum(20)->setMinObjectNum(5);
+
     }
 
     public static function mainServerCreate(EventRegister $register)
@@ -64,6 +72,11 @@ class EasySwooleEvent implements Event
 //		Crontab::getInstance()->addTask(TaskOne::class);
 		// 开始一个定时任务计划
 //		Crontab::getInstance()->addTask(TaskTwo::class);
+
+        /**
+         * **************** FastCache 快速缓存 ****************
+         */
+        Cache::getInstance()->setTempDir(EASYSWOOLE_TEMP_DIR)->attachToServer(ServerManager::getInstance()->getSwooleServer());
     }
 
     public static function onRequest(Request $request, Response $response): bool

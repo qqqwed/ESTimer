@@ -16,7 +16,7 @@ class Router extends AbstractRouter
 {
 	function initialize(RouteCollector $routeCollector)
 	{
-		$routeCollector->get('/test', 'Index/test_mysql');
+		$routeCollector->get('/test', 'IndexController/test_mysql');
 		$routeCollector->get('/user/get_one', '/Admin/User/getOne');
 		$routeCollector->post('/admin/user/create', '/Admin/User/create');
 	}

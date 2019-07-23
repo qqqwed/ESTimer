@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "091cefb90bce62c8522542a14eaef996",
+    "content-hash": "baf3d992073194995dc6a3aa345a0782",
     "packages": [
         {
             "name": "doctrine/instantiator",
@@ -303,6 +303,58 @@
                 "swoole"
             ],
             "time": "2019-07-15T14:25:04+00:00"
+        },
+        {
+            "name": "easyswoole/fast-cache",
+            "version": "1.1.7",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/easy-swoole/fast-cache.git",
+                "reference": "5c6d60e93bae5083de46aa38b766ad5f19ca13b6"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/easy-swoole/fast-cache/zipball/5c6d60e93bae5083de46aa38b766ad5f19ca13b6",
+                "reference": "5c6d60e93bae5083de46aa38b766ad5f19ca13b6",
+                "shasum": "",
+                "mirrors": [
+                    {
+                        "url": "https://mirrors.aliyun.com/composer/dists/%package%/%reference%.%type%",
+                        "preferred": true
+                    }
+                ]
+            },
+            "require": {
+                "easyswoole/component": "^1.4",
+                "easyswoole/spl": "^1.1",
+                "easyswoole/swoole-ide-helper": "^1.2",
+                "php": ">=7.1.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "EasySwoole\\FastCache\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "Apache-2.0"
+            ],
+            "authors": [
+                {
+                    "name": "YF",
+                    "email": "291323003@qq.com"
+                }
+            ],
+            "description": "An efficient swoole framework",
+            "homepage": "https://www.easyswoole.com/",
+            "keywords": [
+                "async",
+                "easyswoole",
+                "framework",
+                "swoole"
+            ],
+            "time": "2019-07-11T01:18:36+00:00"
         },
         {
             "name": "easyswoole/http",

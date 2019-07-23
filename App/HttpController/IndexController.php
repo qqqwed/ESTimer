@@ -12,10 +12,11 @@ namespace App\HttpController;
 use App\Utility\Pool\MysqlObject;
 use App\Utility\Pool\MysqlPool;
 use EasySwoole\Component\TableManager;
+use EasySwoole\FastCache\Cache;
 use EasySwoole\Http\AbstractInterface\Controller;
 use EasySwoole\Http\Message\Status;
 
-class Index extends Controller
+class IndexController extends Controller
 {
 	function index()
 	{
@@ -25,11 +26,6 @@ class Index extends Controller
 
 	public function test_mysql()
 	{
-//		$configArr = \EasySwoole\EasySwoole\Config::getInstance()->getConf('MYSQL');
-//		$config = new Config($configArr);
-//		$db = new Mysqli($config);
-//		var_dump($db);
-
 		$table_name = 'jt_user';
 
 		/**
@@ -38,6 +34,19 @@ class Index extends Controller
 		$db = MysqlPool::defer();
 		$data = $db->getOne($table_name);
 		$this->writeJson(Status::CODE_OK, $data);
-
 	}
+
+	public function test_fast_cache()
+    {
+//        Cache::getInstance()->set('name', ['id'=>3]);
+//        $data = Cache::getInstance()->get('name');
+         cache('name', 'martini');
+         $data = cache('name');
+
+//        var_dump($data);
+        $this->writeJson(Status::CODE_OK, $data);
+    }
+
+
+
 }
