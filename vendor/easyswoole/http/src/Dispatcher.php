@@ -150,7 +150,7 @@ class Dispatcher
         while ($maxDepth >= 0){
             $className = '';
             for ($i=0 ;$i<$maxDepth;$i++){
-                $className = $className."\\".ucfirst($list[$i] ?: 'Index');//为一级控制器Index服务
+                $className = $className."\\".ucfirst($list[$i] ?: 'IndexController');//为一级控制器IndexController服务
             }
             if(class_exists($this->controllerNameSpacePrefix.$className)){
                 //尝试获取该class后的actionName
@@ -158,8 +158,8 @@ class Dispatcher
                 $finalClass = $this->controllerNameSpacePrefix.$className;
                 break;
             }else{
-                //尝试搜搜index控制器
-                $temp = $className."\\Index";
+                //尝试搜搜indexController控制器
+                $temp = $className."\\IndexController";
                 if(class_exists($this->controllerNameSpacePrefix.$temp)){
                     $finalClass = $this->controllerNameSpacePrefix.$temp;
                     //尝试获取该class后的actionName
