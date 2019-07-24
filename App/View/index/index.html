@@ -1,10 +1,81 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+    <meta charset="utf-8" >
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>JTimer秒级定时器管理</title>
+    <link rel="stylesheet" href="{$smarty.const.__STATIC__}/layui/css/layui.css">
+    <link rel="stylesheet" href="{$smarty.const.__STATIC__}/layui/css/modules/layer/default/layer.css">
+    <link rel="stylesheet" href="{$smarty.const.__STATIC__}/css/adminindex.css">
 </head>
-<body>
-    <h2>这里是首页页面{$user}</h2>
+<body class="layui-layout-body">
+<div class="layui-layout layui-layout-admin">
+    <div class="layui-header">
+        <div class="layui-logo">JTimer秒级定时器管理</div>
+        <!-- 头部区域（可配合layui已有的水平导航） -->
+        <ul class="layui-nav layui-layout-left" id="app-tab-content">
+            <li class="layui-nav-item noclose layui-this"  app-id="0"><a href="#">控制台</a></li>
+        </ul>
+        <ul class="layui-nav layui-layout-right">
+            <li class="layui-nav-item" lay-unselect id="refresh-btn">
+                <a href="javascript:;">
+                    <i class="layui-icon" style="font-size: 20px;">&#x1002;</i>
+                </a>
+            </li>
+            <li class="layui-nav-item">
+                <a href="javascript:;">
+                    <img src="http://t.cn/RCzsdCq" class="layui-nav-img">
+                    {$admin_user.username}
+                </a>
+                <dl class="layui-nav-child" lay-unselect>
+                    <dd>修改密码</dd>
+                </dl>
+            </li>
+            <li class="layui-nav-item">退了</li>
+        </ul>
+    </div>
+
+    <div class="layui-side layui-bg-black">
+        <div class="layui-side-scroll">
+            <!-- 左侧导航区域（可配合layui已有的垂直导航） -->
+            <ul class="layui-nav layui-nav-tree"  lay-filter="test">
+                <li class="layui-nav-item" lay-unselect><a href="#">控制台</a></li>
+                <li class="layui-nav-item" lay-unselect>
+                    <a class="" href="javascript:;">任务管理</a>
+                    <dl class="layui-nav-child"  lay-unselect >
+                        <dd><a href="#">任务列表</a></dd>
+                        <dd><a href="#">任务分类</a></dd>
+                        <dd><a href="#">执行日志</a></dd>
+                    </dl>
+                </li>
+                <li class="layui-nav-item lay-unselect">
+                    <a href="#">设置</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="layui-body" id="frame_content">
+        <iframe src="#" frameborder="0" class="appframe" style="width: 100%; height: 98%;" id="app-id-0"></iframe>
+    </div>
+
+    <div class="layui-footer">
+        <!-- 底部固定区域 -->
+        © https://blog.csdn.net/u010837612 - JTimer秒级定时器管理 By 周君
+    </div>
+</div>
+<script src="{$smarty.const.__STATIC__}/layui/layui.js"></script>
+
+<script>
+    var layer = null;
+    //JavaScript代码区域
+    layui.use(['element','layer'], function(){
+        layer = layui.layer;
+        $.getScript('{$smarty.const.__STATIC__}/js/adminindex.js');
+    });
+</script>
+<script src="https://cdn.bootcss.com/jquery/2.0.3/jquery.min.js"></script>
+<script src="{$smarty.const.__STATIC__}/js/common.js"></script>
+
 </body>
 </html>

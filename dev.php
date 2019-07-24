@@ -5,7 +5,7 @@
  * Date: 2019-01-01
  * Time: 20:06
  */
-
+defined('__STATIC__') or define('__STATIC__', '/static');
 return [
     'SERVER_NAME' => "EasySwoole",
     'MAIN_SERVER' => [
@@ -19,7 +19,9 @@ return [
 			'task_worker_num'       => 8,
 			'reload_async'          => true,
 			'task_enable_coroutine' => true,
-			'max_wait_time'         => 3
+			'max_wait_time'         => 3,
+            'document_root'         => EASYSWOOLE_ROOT . '/Public',
+            'enable_static_handler' => true
 		],
 	],
     'TEMP_DIR' => null,
