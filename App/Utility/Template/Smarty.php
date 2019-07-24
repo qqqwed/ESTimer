@@ -108,14 +108,13 @@ class Smarty implements RenderInterface
      * @param array $options 模板参数
      *
      * @return string|null
-     * @throws \SmartyException
      * @author Dong.cx 2019-07-24 13:58
      * @version V4.0.1
      */
     public function fetch(string $template, array $data = [], array $options = [])
     {
         $data = array_merge($this->data, $data);
-        return $this->render($template, $data, $options);
+        return Render::getInstance()->render($template, $data, $options);
     }
 
     /**

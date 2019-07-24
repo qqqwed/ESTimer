@@ -15,7 +15,7 @@ use EasySwoole\Http\AbstractInterface\Controller;
 class AdminBaseController extends Controller
 {
     /** @var Smarty 页面渲染器实例*/
-    protected $smarty;
+    protected static $smarty;
 
     function index()
     {
@@ -26,10 +26,10 @@ class AdminBaseController extends Controller
     public function __construct()
     {
         parent::__construct();
-        $this->smarty = Smarty::getInstance();
+        self::$smarty = Smarty::getInstance();
 
         // ip限制
-        $ips = get_setting('admin_limit_ip');
+//        $ips = get_setting('admin_limit_ip');
 
 
     }
@@ -44,7 +44,7 @@ class AdminBaseController extends Controller
      */
     public function assign($name, $value = '')
     {
-        $this->smarty->assign($name, $value);
+        self::$smarty->assign($name, $value);
     }
 
     /**
@@ -60,7 +60,8 @@ class AdminBaseController extends Controller
      */
     public function fetch(string $template, array $data = [], array $options = [])
     {
-        return $this->smarty->fetch($template, $data, $options);
+        return self::$smarty->fetch($template, $data, $options);
+
     }
 
     /**
@@ -69,9 +70,9 @@ class AdminBaseController extends Controller
      * @author Dong.cx 2019-07-24 14:37
      * @version V4.0.1
      */
-    public function reloadSmarty()
+    public function reload_smarty_render()
     {
-        $this->smarty->reload();
-//        $this->response()->write('restart SmartyRender success');
+        self::$smarty->reload();
+        $this->response()->write('restart SmartyRender success');
     }
 }
