@@ -19,6 +19,7 @@ return array(
     'EasySwoole\\Validate\\' => array($vendorDir . '/easyswoole/validate/src'),
     'EasySwoole\\Utility\\' => array($vendorDir . '/easyswoole/utility/src'),
     'EasySwoole\\Trigger\\' => array($vendorDir . '/easyswoole/trigger/src'),
+    'EasySwoole\\Template\\' => array($vendorDir . '/easyswoole/template/src'),
     'EasySwoole\\Spl\\' => array($vendorDir . '/easyswoole/spl/src'),
     'EasySwoole\\Mysqli\\' => array($vendorDir . '/easyswoole/mysqli/src'),
     'EasySwoole\\Log\\' => array($vendorDir . '/easyswoole/log/src'),

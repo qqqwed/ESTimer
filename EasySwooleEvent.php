@@ -13,6 +13,7 @@ use App\Crontab\TaskOne;
 use App\Crontab\TaskTwo;
 use App\Process\HotReload;
 use App\Utility\Pool\MysqlPool;
+use App\Utility\Template\Smarty;
 use EasySwoole\Component\Pool\PoolManager;
 use EasySwoole\EasySwoole\Crontab\Crontab;
 use EasySwoole\EasySwoole\Swoole\EventRegister;
@@ -20,6 +21,7 @@ use EasySwoole\EasySwoole\AbstractInterface\Event;
 use EasySwoole\FastCache\Cache;
 use EasySwoole\Http\Request;
 use EasySwoole\Http\Response;
+use EasySwoole\Template\Render;
 
 class EasySwooleEvent implements Event
 {
@@ -77,6 +79,12 @@ class EasySwooleEvent implements Event
          * **************** FastCache 快速缓存 ****************
          */
         Cache::getInstance()->setTempDir(EASYSWOOLE_TEMP_DIR)->attachToServer(ServerManager::getInstance()->getSwooleServer());
+
+        /**
+         * **************** 配置Smarty渲染器 ****************
+         */
+        Render::getInstance()->getConfig()->setRender(new Smarty());
+        Render::getInstance()->attachServer(ServerManager::getInstance()->getSwooleServer());
     }
 
     public static function onRequest(Request $request, Response $response): bool

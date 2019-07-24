@@ -11,17 +11,31 @@ namespace App\HttpController;
 
 use App\Utility\Pool\MysqlObject;
 use App\Utility\Pool\MysqlPool;
+use App\Utility\Template\Smarty;
 use EasySwoole\Component\TableManager;
 use EasySwoole\FastCache\Cache;
 use EasySwoole\Http\AbstractInterface\Controller;
 use EasySwoole\Http\Message\Status;
+use EasySwoole\Template\Render;
 
-class IndexController extends Controller
+class IndexController extends AdminBaseController
 {
 	function index()
 	{
 		// TODO: Implement index() method.
-		$this->response()->write('hello easySwoole');
+//		$this->response()->write('hello easySwoole');
+//        $this->response()->write(Render::getInstance()->render('index/index.html',[
+//            'user'=>'easyswoole',
+//            'time'=>time()
+//        ]));
+
+        //        $this->response()->write(Smarty::getInstance()->render('index/index.html',[
+//            'user'=>'easyswoole',
+//            'time'=>time()
+//        ]));
+        $this->assign('user', 'martini');
+        $this->response()->write($this->fetch('index/index.html'));
+
 	}
 
 	public function test_mysql()
@@ -47,6 +61,14 @@ class IndexController extends Controller
         $this->writeJson(Status::CODE_OK, $data);
     }
 
-
+    /**
+     * 重新渲染模板文件
+     * @author Dong.cx 2019-07-24 14:57
+     * @version V4.0.1
+     */
+    public function reload_smarty_render()
+    {
+        $this->reloadSmarty();
+    }
 
 }

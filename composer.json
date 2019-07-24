@@ -8,6 +8,8 @@
         "easyswoole/easyswoole": "3.x",
         "easyswoole/swoole-ide-helper": "^1.3",
         "easyswoole/mysqli": "^1.2",
-        "easyswoole/fast-cache": "^1.1"
+        "easyswoole/fast-cache": "^1.1",
+        "easyswoole/template": "^1.0",
+        "smarty/smarty": "~3.1"
     }
 }
