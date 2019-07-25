@@ -9,6 +9,8 @@
 namespace App\Timer;
 
 
+use EasySwoole\EasySwoole\Logger;
+
 class TaskManager
 {
     const LOG_KEY = 'cmd_cron_task_log';

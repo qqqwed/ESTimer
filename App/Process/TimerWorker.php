@@ -10,6 +10,7 @@ namespace App\Process;
 
 
 use App\Timer\CronExpression;
+use App\Timer\ProcessTask;
 use App\Timer\TaskManager;
 use App\Timer\TimingWheel;
 use EasySwoole\Component\Process\AbstractProcess;
@@ -59,11 +60,15 @@ class TimerWorker extends AbstractProcess
                     $interval = strtotime($next_run_time) - $now;
                     Logger::getInstance()->log('$interval：'.$interval);
                     $wheel->add($interval,$task);
-                    $worker->task($task);
+                    Logger::getInstance()->log('这是要执行的任务'. print_r($task));
+
+                    $taskClass = new ProcessTask($task);
+                    \EasySwoole\EasySwoole\Swoole\Task\TaskManager::processAsync($taskClass);
+//                    $worker->task($task);
                 }
             }
         });
-
+        TaskManager::tick();
 
     }
 
