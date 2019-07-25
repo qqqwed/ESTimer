@@ -574,6 +574,124 @@
         ]
     },
     {
+        "name": "easyswoole/rpc",
+        "version": "4.0.4",
+        "version_normalized": "4.0.4.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/easy-swoole/rpc.git",
+            "reference": "a320c1d9713e779c119454238a19d0e415f08b43"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/easy-swoole/rpc/zipball/a320c1d9713e779c119454238a19d0e415f08b43",
+            "reference": "a320c1d9713e779c119454238a19d0e415f08b43",
+            "shasum": "",
+            "mirrors": [
+                {
+                    "url": "https://mirrors.aliyun.com/composer/dists/%package%/%reference%.%type%",
+                    "preferred": true
+                }
+            ]
+        },
+        "require": {
+            "easyswoole/component": "^1.7",
+            "easyswoole/spl": "^1.0",
+            "easyswoole/trigger": "^1.0",
+            "easyswoole/utility": "^1.0",
+            "ext-json": ">=1.0",
+            "ext-openssl": ">=7.1",
+            "ext-swoole": ">=4.3.0",
+            "php": ">=7.1.0"
+        },
+        "require-dev": {
+            "easyswoole/swoole-ide-helper": "^1.1"
+        },
+        "time": "2019-07-17T15:50:06+00:00",
+        "type": "library",
+        "installation-source": "dist",
+        "autoload": {
+            "psr-4": {
+                "EasySwoole\\Rpc\\": "src/",
+                "EasySwoole\\Rpc\\Test\\": "test/"
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "Apache-2.0"
+        ],
+        "authors": [
+            {
+                "name": "YF",
+                "email": "291323003@qq.com"
+            }
+        ],
+        "description": "An efficient swoole framework",
+        "homepage": "https://www.easyswoole.com/",
+        "keywords": [
+            "async",
+            "easyswoole",
+            "framework",
+            "swoole"
+        ]
+    },
+    {
+        "name": "easyswoole/session",
+        "version": "1.0.0",
+        "version_normalized": "1.0.0.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/easy-swoole/session.git",
+            "reference": "9a0b8168f2806978b6c73cee57dc3e298a87b8a4"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/easy-swoole/session/zipball/9a0b8168f2806978b6c73cee57dc3e298a87b8a4",
+            "reference": "9a0b8168f2806978b6c73cee57dc3e298a87b8a4",
+            "shasum": "",
+            "mirrors": [
+                {
+                    "url": "https://mirrors.aliyun.com/composer/dists/%package%/%reference%.%type%",
+                    "preferred": true
+                }
+            ]
+        },
+        "require": {
+            "easyswoole/http": "^1.2",
+            "php": ">=7.1.0"
+        },
+        "require-dev": {
+            "easyswoole/swoole-ide-helper": "^1.2"
+        },
+        "time": "2019-06-16T05:36:15+00:00",
+        "type": "library",
+        "installation-source": "dist",
+        "autoload": {
+            "psr-4": {
+                "EasySwoole\\Session\\": "src/",
+                "EasySwoole\\Session\\Test\\": "tests/"
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "Apache-2.0"
+        ],
+        "authors": [
+            {
+                "name": "YF",
+                "email": "291323003@qq.com"
+            }
+        ],
+        "description": "easyswoole component",
+        "homepage": "https://www.easyswoole.com/",
+        "keywords": [
+            "async",
+            "easyswoole",
+            "framework",
+            "swoole"
+        ]
+    },
+    {
         "name": "easyswoole/spl",
         "version": "1.2.3",
         "version_normalized": "1.2.3.0",

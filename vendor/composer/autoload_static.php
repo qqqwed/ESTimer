@@ -47,6 +47,10 @@ class ComposerStaticInit920735c004bfc64aa1d170d049795ff5
             'EasySwoole\\Trigger\\' => 19,
             'EasySwoole\\Template\\' => 20,
             'EasySwoole\\Spl\\' => 15,
+            'EasySwoole\\Session\\Test\\' => 24,
+            'EasySwoole\\Session\\' => 19,
+            'EasySwoole\\Rpc\\Test\\' => 20,
+            'EasySwoole\\Rpc\\' => 15,
             'EasySwoole\\Mysqli\\' => 18,
             'EasySwoole\\Log\\' => 15,
             'EasySwoole\\Http\\' => 16,
@@ -134,6 +138,22 @@ class ComposerStaticInit920735c004bfc64aa1d170d049795ff5
         'EasySwoole\\Spl\\' => 
         array (
             0 => __DIR__ . '/..' . '/easyswoole/spl/src',
+        ),
+        'EasySwoole\\Session\\Test\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/easyswoole/session/tests',
+        ),
+        'EasySwoole\\Session\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/easyswoole/session/src',
+        ),
+        'EasySwoole\\Rpc\\Test\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/easyswoole/rpc/test',
+        ),
+        'EasySwoole\\Rpc\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/easyswoole/rpc/src',
         ),
         'EasySwoole\\Mysqli\\' => 
         array (

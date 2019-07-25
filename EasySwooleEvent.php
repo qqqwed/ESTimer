@@ -11,7 +11,11 @@ namespace EasySwoole\EasySwoole;
 
 use App\Crontab\TaskOne;
 use App\Crontab\TaskTwo;
+use App\HttpController\TimerManageController;
+use App\Logic\TimerManageLogic;
+use App\Process\DbWork;
 use App\Process\HotReload;
+use App\Process\TimerWorker;
 use App\Utility\Pool\MysqlPool;
 use App\Utility\Template\Smarty;
 use EasySwoole\Component\Pool\PoolManager;
@@ -21,6 +25,8 @@ use EasySwoole\EasySwoole\AbstractInterface\Event;
 use EasySwoole\FastCache\Cache;
 use EasySwoole\Http\Request;
 use EasySwoole\Http\Response;
+use EasySwoole\Rpc\NodeManager\RedisManager;
+use EasySwoole\Rpc\Rpc;
 use EasySwoole\Template\Render;
 
 class EasySwooleEvent implements Event
@@ -56,7 +62,13 @@ class EasySwooleEvent implements Event
 		 */
 		$swooleServer = ServerManager::getInstance()->getSwooleServer();
 		$swooleServer->addProcess((new HotReload('HotReload', ['disableInotify' => false]))->getProcess());
-
+        /**
+         * **************** 自定义进程 ****************
+         */
+        global $nowTimestamp;
+        $nowTimestamp = time();
+		$swooleServer->addProcess((new DbWork('DbWork'))->getProcess());
+		$swooleServer->addProcess((new TimerWorker('TimerWorker'))->getProcess());
 		/**
 		 * **************** mysql 热启动 ****************
 		 */
@@ -85,6 +97,20 @@ class EasySwooleEvent implements Event
          */
         Render::getInstance()->getConfig()->setRender(new Smarty());
         Render::getInstance()->attachServer(ServerManager::getInstance()->getSwooleServer());
+
+        /**
+         * **************** Rpc 服务 ****************
+         */
+//        $rpcConfig = new \EasySwoole\Rpc\Config();
+//        //注册服务名称
+//        $rpcConfig->setServerIp('127.0.0.1'); //注册提供rpc服务的ip
+//        $rpcConfig->setNodeManager(new RedisManager('127.0.0.1')); //注册节点服务器
+//        $rpcConfig->getBroadcastConfig()->setSecretKey('lucky'); //设置秘钥
+//
+//        $rpc = Rpc::getInstance($rpcConfig);
+//        $rpc->add(new TimerManageLogic());
+//
+//        $rpc->attachToServer(ServerManager::getInstance()->getSwooleServer());
     }
 
     public static function onRequest(Request $request, Response $response): bool

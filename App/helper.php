@@ -18,7 +18,7 @@ if (!function_exists('cache')) {
      * @param int|null $ttl 缓存有效时间
      * @param float $timeout socket等待超时
      *
-     * @return bool|mixed|null
+     * @return mixed
      * @author Dong.cx 2019-07-23 18:24
      * @version V4.0.1
      */
@@ -52,7 +52,7 @@ if (!function_exists('get_setting')) {
      * @author Dong.cx 2019-07-23 20:39
      * @version V4.0.1
      */
-    function get_setting($name, $tableName = 'jt_setting')
+    function get_setting($name, $tableName = SETTING)
     {
         $key = 'estimer_setting_' . $name;
         $value = cache($key);
