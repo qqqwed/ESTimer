@@ -10,6 +10,7 @@ namespace App\HttpController;
 
 
 use App\Utility\Template\Smarty;
+use EasySwoole\EasySwoole\ServerManager;
 use EasySwoole\Http\AbstractInterface\Controller;
 
 class AdminBaseController extends Controller
@@ -29,8 +30,21 @@ class AdminBaseController extends Controller
         self::$smarty = Smarty::getInstance();
 
         // ip限制
-//        $ips = get_setting('admin_limit_ip');
+        $ips = get_setting('admin_limit_ip');
+        if($ips){
+            $ip = $this->ip();
+            if(!in_array($ip,explode(',',$ips))){
+                $this->response()->write('无权限访问');
+                $this->response()->redirect('index/login');
+            }
+        }
 
+        //登录判断
+        $admin_user = $this->getCurrentUser();
+        if(empty($admin_user)){
+            $this->redirect(url('public/login'));
+        }
+        $this->assign('admin_user',$admin_user);
 
     }
 
@@ -75,4 +89,26 @@ class AdminBaseController extends Controller
         self::$smarty->reload();
         $this->response()->write('restart SmartyRender success');
     }
+
+    /**
+     * 获取客户端IP
+     * @return string
+     * @author Dong.cx 2019-07-25 09:51
+     * @version V4.0.1
+     */
+    public function ip()
+    {
+        $request = ServerManager::getInstance()->getSwooleServer()->connection_info($this->request()->getSwooleRequest()->fd);
+       $ip = $request['remote_ip'] ?? '';
+       if (!$ip) {
+           //header 地址，例如经过nginx proxy后
+           $headers = $this->request()->getHeaders();
+           if ($headers) {
+               $ip = $headers['host'][0];
+           }
+       }
+        return $ip;
+    }
+
+
 }

@@ -22,7 +22,9 @@ class IndexController extends AdminBaseController
 {
 	function index()
 	{
-        $this->response()->write($this->fetch('index/index.html'));
+	    $ip = $this->ip();
+	    $this->writeJson(Status::CODE_OK, $ip);
+//        $this->response()->write($this->fetch('index/index.html'));
 //	    //		$this->response()->write('hello easySwoole');
 //        Render::getInstance()->restartWorker();
 //        $this->response()->write(Render::getInstance()->render('index/index.html'));
