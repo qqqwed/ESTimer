@@ -35,7 +35,8 @@ class TimerWorker extends AbstractProcess
             $wheel = new TimingWheel();
             TaskManager::isChange(true);
             \EasySwoole\Component\Timer::getInstance()->loop(1 * 1000, function() use($wheel) {
-                $now = TaskManager::$nowTime;
+//                $now = TaskManager::$nowTime;
+                $now = Cache::getInstance()->get('nowTimestamp');
 
                 if(TaskManager::isChange()){
                     // 如果任务发生改变,重置时间轮,重新将任务加入时间轮片中
@@ -71,7 +72,8 @@ class TimerWorker extends AbstractProcess
                         //                    $worker->task($task);
                     }
                 }
-                TaskManager::tick();
+//                TaskManager::tick();
+                Cache::getInstance()->set('nowTimestamp', time());
             });
 //            TaskManager::tick();
 //

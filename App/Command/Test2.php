@@ -13,11 +13,11 @@ use EasySwoole\EasySwoole\Command\CommandInterface;
 use EasySwoole\EasySwoole\Command\Utility;
 use EasySwoole\EasySwoole\Logger;
 
-class Test implements CommandInterface
+class Test2 implements CommandInterface
 {
 	public function commandName(): string
 	{
-		return 'test';
+		return 'test2';
 	}
 
 	public function exec(array $args): ?string
@@ -25,7 +25,7 @@ class Test implements CommandInterface
 		//打印参数,打印测试值
 		var_dump($args);
 		echo 'test'.PHP_EOL;
-		Logger::getInstance()->log('commond:test的逻辑'.date('Y-m-d h:i:s'));
+		Logger::getInstance()->log('commond:test2的逻辑'.date('Y-m-d h:i:s'));
 		return null;
 	}
 

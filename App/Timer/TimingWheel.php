@@ -30,9 +30,9 @@ class TimingWheel
      */
     public function getCurrentIndex()
     {
-        $nowTimestamp = TaskManager::$nowTime;
+//        $nowTimestamp = Cache::getInstance()->get('nowTimestamp');
+        $nowTimestamp = time();
         Logger::getInstance()->log('nowTimestamp:' . $nowTimestamp);
-        Cache::getInstance()->set('nowTimestamp', TaskManager::$nowTime);
         $minute = date('i', $nowTimestamp);
         $second = date('s', $nowTimestamp);
         Logger::getInstance()->log($minute.'分'.$second . '秒');

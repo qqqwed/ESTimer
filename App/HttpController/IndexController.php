@@ -23,8 +23,8 @@ class IndexController extends AdminBaseController
 {
 	function index()
 	{
-//        TaskManager::clearLogs();
-	    Cache::getInstance()->flush();
+        TaskManager::clearLogs();
+//	    Cache::getInstance()->flush();
 //	    \cache('age', 11);
 //	    $list = cache('age');
 //        $list = MysqlPool::invoke(function (MysqlObject $mysqlObject) {

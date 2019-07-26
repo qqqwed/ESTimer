@@ -15,6 +15,7 @@ use App\Utility\Pool\MysqlObject;
 use App\Utility\Pool\MysqlPool;
 use EasySwoole\Component\Process\AbstractProcess;
 use EasySwoole\EasySwoole\Logger;
+use EasySwoole\FastCache\Cache;
 use Swoole\Timer;
 
 class DbWork extends AbstractProcess
@@ -30,6 +31,7 @@ class DbWork extends AbstractProcess
     protected function run($arg)
     {
         go(function(){
+            TaskManager::clearLogs();
             \EasySwoole\Component\Timer::getInstance()->loop(5 * 1000, function(){
                 // 将数据库中的任务写入到缓存中
                 /** @var $db MysqlObject */
@@ -54,7 +56,8 @@ class DbWork extends AbstractProcess
                 $key = 'has_delete_log_'.date('Y-m-d') . '_'.$day;
                 if($day > 0 && cache($key) != true){ //清除日志一天只需执行一次即可
                     $db->where('create_time','<',date('Y-m-d 00:00:00',strtotime("-$day day")))->delete(CRON_TASK_LOG);
-                    cache($key,true,24*60*60);
+                    Cache::getInstance()->set($key, true, 24*60*60);
+//                    cache($key,true,24*60*60);
                 }
             });
         });
