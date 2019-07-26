@@ -15,6 +15,7 @@ use App\HttpController\TimerManageController;
 use App\Logic\TimerManageLogic;
 use App\Process\DbWork;
 use App\Process\HotReload;
+use App\Process\ProcessTest;
 use App\Process\TimerWorker;
 use App\Utility\Pool\MysqlPool;
 use App\Utility\Template\Smarty;
@@ -23,11 +24,14 @@ use EasySwoole\EasySwoole\Crontab\Crontab;
 use EasySwoole\EasySwoole\Swoole\EventRegister;
 use EasySwoole\EasySwoole\AbstractInterface\Event;
 use EasySwoole\FastCache\Cache;
+use EasySwoole\FastCache\CacheProcessConfig;
+use EasySwoole\FastCache\SyncData;
 use EasySwoole\Http\Request;
 use EasySwoole\Http\Response;
 use EasySwoole\Rpc\NodeManager\RedisManager;
 use EasySwoole\Rpc\Rpc;
 use EasySwoole\Template\Render;
+use EasySwoole\Utility\File;
 
 class EasySwooleEvent implements Event
 {
@@ -35,7 +39,6 @@ class EasySwooleEvent implements Event
     public static function initialize()
     {
         date_default_timezone_set('Asia/Shanghai');
-        include_once EASYSWOOLE_ROOT.'/App/helper.php';
         /**
          * **************** 加载定时器管理配置文件 ****************
          */
@@ -65,8 +68,9 @@ class EasySwooleEvent implements Event
         /**
          * **************** 自定义进程 ****************
          */
-        global $nowTimestamp;
-        $nowTimestamp = time();
+//        $swooleServer->addProcess((new ProcessTest('Process_test'))->getProcess());
+//        global $nowTimestamp;
+//        $nowTimestamp = time();
 		$swooleServer->addProcess((new DbWork('DbWork'))->getProcess());
 		$swooleServer->addProcess((new TimerWorker('TimerWorker'))->getProcess());
 		/**
@@ -90,6 +94,42 @@ class EasySwooleEvent implements Event
         /**
          * **************** FastCache 快速缓存 ****************
          */
+        // 每隔5秒将数据存回文件
+        Cache::getInstance()->setTickInterval(5 * 1000);//设置定时频率
+        Cache::getInstance()->setOnTick(function (SyncData $SyncData, CacheProcessConfig $cacheProcessConfig) {
+            $data = [
+                'data'  => $SyncData->getArray(),
+                'queue' => $SyncData->getQueueArray(),
+                'ttl'   => $SyncData->getTtlKeys(),
+            ];
+            $path = EASYSWOOLE_TEMP_DIR . '/FastCacheData/' . $cacheProcessConfig->getProcessName();
+            File::createFile($path,serialize($data));
+        });
+
+        // 启动时将存回的文件重新写入
+        Cache::getInstance()->setOnStart(function (CacheProcessConfig $cacheProcessConfig) {
+            $path = EASYSWOOLE_TEMP_DIR . '/FastCacheData/' . $cacheProcessConfig->getProcessName();
+            if(is_file($path)){
+                $data = unserialize(file_get_contents($path));
+                $syncData = new SyncData();
+                $syncData->setArray($data['data']);
+                $syncData->setQueueArray($data['queue']);
+                $syncData->setTtlKeys(($data['ttl']));
+                return $syncData;
+            }
+        });
+
+        // 在守护进程时,php easyswoole stop 时会调用,落地数据
+        Cache::getInstance()->setOnShutdown(function (SyncData $SyncData, CacheProcessConfig $cacheProcessConfig) {
+            $data = [
+                'data'  => $SyncData->getArray(),
+                'queue' => $SyncData->getQueueArray(),
+                'ttl'   => $SyncData->getTtlKeys(),
+            ];
+            $path = EASYSWOOLE_TEMP_DIR . '/FastCacheData/' . $cacheProcessConfig->getProcessName();
+            File::createFile($path,serialize($data));
+        });
+
         Cache::getInstance()->setTempDir(EASYSWOOLE_TEMP_DIR)->attachToServer(ServerManager::getInstance()->getSwooleServer());
 
         /**

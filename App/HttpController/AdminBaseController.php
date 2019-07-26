@@ -27,24 +27,24 @@ class AdminBaseController extends Controller
     public function __construct()
     {
         parent::__construct();
-        self::$smarty = Smarty::getInstance();
-
-        // ip限制
-        $ips = get_setting('admin_limit_ip');
-        if($ips){
-            $ip = $this->ip();
-            if(!in_array($ip,explode(',',$ips))){
-                $this->response()->write('无权限访问');
-                $this->response()->redirect('index/login');
-            }
-        }
-
-        //登录判断
-        $admin_user = $this->getCurrentUser();
-        if(empty($admin_user)){
-            $this->redirect(url('public/login'));
-        }
-        $this->assign('admin_user',$admin_user);
+//        self::$smarty = Smarty::getInstance();
+//
+//        // ip限制
+//        $ips = get_setting('admin_limit_ip');
+//        if($ips){
+//            $ip = $this->ip();
+//            if(!in_array($ip,explode(',',$ips))){
+//                $this->response()->write('无权限访问');
+//                $this->response()->redirect('index/login');
+//            }
+//        }
+//
+//        //登录判断
+//        $admin_user = $this->getCurrentUser();
+//        if(empty($admin_user)){
+//            $this->redirect(url('public/login'));
+//        }
+//        $this->assign('admin_user',$admin_user);
 
     }
 

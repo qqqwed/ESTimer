@@ -9,6 +9,7 @@
 namespace App\HttpController;
 
 
+use App\Timer\TaskManager;
 use App\Utility\Pool\MysqlObject;
 use App\Utility\Pool\MysqlPool;
 use App\Utility\Template\Smarty;
@@ -22,8 +23,16 @@ class IndexController extends AdminBaseController
 {
 	function index()
 	{
-	    $ip = $this->ip();
-	    $this->writeJson(Status::CODE_OK, $ip);
+//        TaskManager::clearLogs();
+	    Cache::getInstance()->flush();
+//	    \cache('age', 11);
+//	    $list = cache('age');
+//        $list = MysqlPool::invoke(function (MysqlObject $mysqlObject) {
+//            return $mysqlObject->where('status', 1)->get('jt_cron_task');
+//        });
+//        var_dump($list);
+//	    $ip = $this->ip();
+//	    $this->writeJson(Status::CODE_OK, $list);
 //        $this->response()->write($this->fetch('index/index.html'));
 //	    //		$this->response()->write('hello easySwoole');
 //        Render::getInstance()->restartWorker();

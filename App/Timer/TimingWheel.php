@@ -10,6 +10,7 @@ namespace App\Timer;
 
 
 use EasySwoole\EasySwoole\Logger;
+use EasySwoole\FastCache\Cache;
 
 class TimingWheel
 {
@@ -30,8 +31,11 @@ class TimingWheel
     public function getCurrentIndex()
     {
         $nowTimestamp = TaskManager::$nowTime;
+        Logger::getInstance()->log('nowTimestamp:' . $nowTimestamp);
+        Cache::getInstance()->set('nowTimestamp', TaskManager::$nowTime);
         $minute = date('i', $nowTimestamp);
         $second = date('s', $nowTimestamp);
+        Logger::getInstance()->log($minute.'分'.$second . '秒');
         return (int)$minute * 60 + (int)$second;
     }
 
@@ -44,6 +48,7 @@ class TimingWheel
     public function popSlots()
     {
         $currentIndex = $this->getCurrentIndex();
+        Logger::getInstance()->log('当前currentIndex:' . $currentIndex);
         $list = $this->wheel[$currentIndex];
         $slots = [];
         if (!empty($list)) {
@@ -82,7 +87,7 @@ class TimingWheel
             'round' => $round,
             'data'  => $data
         ];
-        Logger::getInstance()->log("slot:" . print_r($slot, true));
+        Logger::getInstance()->log("新增任务到时间轮的槽号". $index ."中:" . print_r($slot, true));
         $this->wheel[$index][] = $slot;
     }
 
