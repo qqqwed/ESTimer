@@ -11,7 +11,6 @@ namespace EasySwoole\EasySwoole;
 
 use App\Crontab\TaskOne;
 use App\Crontab\TaskTwo;
-use App\HttpController\TimerManageController;
 use App\Logic\TimerManageLogic;
 use App\Process\DbWork;
 use App\Process\HotReload;
@@ -69,8 +68,6 @@ class EasySwooleEvent implements Event
          * **************** 自定义进程 ****************
          */
 //        $swooleServer->addProcess((new ProcessTest('Process_test'))->getProcess());
-//        global $nowTimestamp;
-//        $nowTimestamp = time();
 		$swooleServer->addProcess((new DbWork('DbWork'))->getProcess());
 		$swooleServer->addProcess((new TimerWorker('TimerWorker'))->getProcess());
 		/**

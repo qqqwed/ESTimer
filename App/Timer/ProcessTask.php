@@ -1,6 +1,6 @@
 <?php
 /**
- * Description:
+ * Description:投递任务模板类
  * Created by Dong.cx
  * DateTime: 2019-07-25 20:37
  * @version V4.0.1

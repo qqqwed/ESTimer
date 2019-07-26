@@ -31,8 +31,8 @@ class UserModel extends BaseModel
 
 		$id = $this->db()->insert($this->tableName, $bean->toArray(null, $bean::FILTER_NOT_NULL));
 		if ($id) {
-		    $bean->setId($id);
-		    return $bean;
+            $bean->setId($id);
+            return $bean;
         }
         return null;
 	}

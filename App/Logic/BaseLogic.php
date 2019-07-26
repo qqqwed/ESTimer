@@ -11,6 +11,7 @@ namespace App\Logic;
 
 use App\Utility\Pool\MysqlObject;
 use App\Utility\Pool\MysqlPool;
+use App\Utility\Pool\MysqlShopPool;
 
 abstract class BaseLogic
 {
@@ -19,7 +20,7 @@ abstract class BaseLogic
 
     public function __construct()
     {
-        $this->db = MysqlPool::defer();
+        $this->db = MysqlShopPool::defer();
     }
 
     /**

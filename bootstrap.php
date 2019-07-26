@@ -7,4 +7,4 @@
  */
 
 \EasySwoole\EasySwoole\Command\CommandContainer::getInstance()->set(new \App\Command\Test());
-\EasySwoole\EasySwoole\Command\CommandContainer::getInstance()->set(new \App\Command\Test2());
+\EasySwoole\EasySwoole\Command\CommandContainer::getInstance()->set(new \App\Command\Demo());

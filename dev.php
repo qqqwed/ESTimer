@@ -28,21 +28,32 @@ return [
     'LOG_DIR' => null,
 
 	/**
-	 * **************** MYSQL CONFIG ****************
+	 * **************** MYSQL-任务管理数据库 CONFIG ****************
 	 */
 	'MYSQL'         => [
 		'host'          => '116.62.127.139',
 		'port'          => '3306',
-		'user'          => 'wldev',
-		'password'      => '7BmkOM2RaooiQw5S',
-		'database'      => 'wljob_dev',
+        'database'      => 'wljob_dev',
+        'user'          => 'wldev',
+        'password'      => '7BmkOM2RaooiQw5S',
 		'timeout'       => '5',
 		'charset'       => 'utf8mb4',
 		'POOL_MAX_NUM'  => '10',
 		'POOL_TIME_OUT' => '0.1'
 	],
 	/**
-	 * **************** MYSQL CONFIG 多数据库情况同上(略) ****************
+	 * **************** MYSQL 任务逻辑数据库 CONFIG 多数据库情况同上(略) ****************
 	 */
+    'MYSQL_SHOP'         => [
+        'host'          => '116.62.127.139',
+        'port'          => '3306',
+        'database'      => 'wlyx-shop',
+        'user'          => 'wldev',
+        'password'      => '7BmkOM2RaooiQw5S',
+        'timeout'       => '5',
+        'charset'       => 'utf8mb4',
+        'POOL_MAX_NUM'  => '10',
+        'POOL_TIME_OUT' => '0.1'
+    ],
 
 ];

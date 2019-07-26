@@ -9,15 +9,17 @@
 namespace App\Command;
 
 
+use App\Logic\DemoLogic;
 use EasySwoole\EasySwoole\Command\CommandInterface;
 use EasySwoole\EasySwoole\Command\Utility;
 use EasySwoole\EasySwoole\Logger;
 
-class Test2 implements CommandInterface
+class Demo implements CommandInterface
 {
+    //TODO:该命令 需要在根目录 bootstrap.php 进行注册
 	public function commandName(): string
 	{
-		return 'test2';
+		return 'demo';
 	}
 
 	public function exec(array $args): ?string
@@ -25,7 +27,9 @@ class Test2 implements CommandInterface
 		//打印参数,打印测试值
 		var_dump($args);
 		echo 'test'.PHP_EOL;
-		Logger::getInstance()->log('commond:test2的逻辑'.date('Y-m-d h:i:s'));
+		Logger::getInstance()->log('commond:demo的逻辑'.date('Y-m-d h:i:s'));
+		$demoLogic = new DemoLogic();
+		$demoLogic->updateGoodsTime();
 		return null;
 	}
 
@@ -34,7 +38,7 @@ class Test2 implements CommandInterface
 		//输出logo
 		$logo = Utility::easySwooleLog();
 		return $logo.<<<HELP_START
-		这是test
+		这是demo
 HELP_START;
 	}
 

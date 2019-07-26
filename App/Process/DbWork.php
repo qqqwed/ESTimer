@@ -42,7 +42,7 @@ class DbWork extends AbstractProcess
                 }
                 // 将缓存中的日志写到数据库中
                 $logList = TaskManager::getLogs();
-                Logger::getInstance()->log('缓存中的日志' . json_encode($logList));
+//                Logger::getInstance()->log('缓存中的日志' . json_encode($logList));
                 if (!empty($logList)) {
                     try {
                         $db->insertMulti(CRON_TASK_LOG, $logList);

@@ -65,7 +65,7 @@ class TimerWorker extends AbstractProcess
                         $interval = strtotime($next_run_time) - $now;
                         Logger::getInstance()->log('$interval：'.$interval);
                         $wheel->add($interval,$task);
-                        Logger::getInstance()->log('这是要执行的任务'. json_encode($task));
+                        Logger::getInstance()->log('这是要执行的任务'. json_encode($task, JSON_UNESCAPED_UNICODE));
 
                         $taskClass = new ProcessTask($task);
                         \EasySwoole\EasySwoole\Swoole\Task\TaskManager::processAsync($taskClass);

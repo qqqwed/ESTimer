@@ -23,7 +23,7 @@ class IndexController extends AdminBaseController
 {
 	function index()
 	{
-        TaskManager::clearLogs();
+//        TaskManager::clearLogs();
 //	    Cache::getInstance()->flush();
 //	    \cache('age', 11);
 //	    $list = cache('age');
@@ -36,7 +36,7 @@ class IndexController extends AdminBaseController
 //        $this->response()->write($this->fetch('index/index.html'));
 //	    //		$this->response()->write('hello easySwoole');
 //        Render::getInstance()->restartWorker();
-//        $this->response()->write(Render::getInstance()->render('index/index.html'));
+        $this->response()->write(Render::getInstance()->render('index/index.html'));
 //
 //        $this->response()->write(Smarty::getInstance()->render('index/index.html',[
 //            'user'=>'easyswoole',

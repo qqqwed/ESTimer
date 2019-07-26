@@ -22,10 +22,8 @@ class Test implements CommandInterface
 
 	public function exec(array $args): ?string
 	{
-		//打印参数,打印测试值
-		var_dump($args);
-		echo 'test'.PHP_EOL;
 		Logger::getInstance()->log('commond:test的逻辑'.date('Y-m-d h:i:s'));
+
 		return null;
 	}
 
