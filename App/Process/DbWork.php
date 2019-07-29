@@ -50,7 +50,6 @@ class DbWork extends AbstractProcess
                         Logger::getInstance()->log('log err >' . $e->getMessage());
                     }
                 }
-
                 // 清除之前的旧日志
                 $day = get_setting('cron_task_log_save_day');
                 $key = 'has_delete_log_'.date('Y-m-d') . '_'.$day;
