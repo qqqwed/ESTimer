@@ -31,6 +31,7 @@ class DemoLogic
             $goodsBean = new GoodsBean($data);
             $goodsModel->update($goodsBean, $data);
             Logger::getInstance()->log("成功执行更新商品时间任务,修改时间为{$time}即". date('Y-m-d H:i:s', $time));
+            return true;
         });
     }
 }

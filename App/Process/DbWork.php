@@ -31,7 +31,6 @@ class DbWork extends AbstractProcess
     protected function run($arg)
     {
         go(function(){
-            TaskManager::clearLogs();
             \EasySwoole\Component\Timer::getInstance()->loop(5 * 1000, function(){
                 // 将数据库中的任务写入到缓存中
                 /** @var $db MysqlObject */
@@ -42,10 +41,11 @@ class DbWork extends AbstractProcess
                 }
                 // 将缓存中的日志写到数据库中
                 $logList = TaskManager::getLogs();
-//                Logger::getInstance()->log('缓存中的日志' . json_encode($logList));
+                Logger::getInstance()->log('缓存中的日志' . json_encode($logList));
                 if (!empty($logList)) {
                     try {
                         $db->insertMulti(CRON_TASK_LOG, $logList);
+                        TaskManager::clearLogs();
                     } catch (\Throwable $e) {
                         Logger::getInstance()->log('log err >' . $e->getMessage());
                     }
@@ -57,7 +57,6 @@ class DbWork extends AbstractProcess
                 if($day > 0 && cache($key) != true){ //清除日志一天只需执行一次即可
                     $db->where('create_time','<',date('Y-m-d 00:00:00',strtotime("-$day day")))->delete(CRON_TASK_LOG);
                     Cache::getInstance()->set($key, true, 24*60*60);
-//                    cache($key,true,24*60*60);
                 }
             });
         });

@@ -23,8 +23,11 @@ class IndexController extends AdminBaseController
 {
 	function index()
 	{
+//        $logList = Cache::getInstance()->get(TaskManager::LOG_KEY);
+//        $data = cache(TaskManager::TASK_IS_CHANGE);
+//        $this->writeJson(200, $data);
 //        TaskManager::clearLogs();
-//	    Cache::getInstance()->flush();
+	    Cache::getInstance()->flush();
 //	    \cache('age', 11);
 //	    $list = cache('age');
 //        $list = MysqlPool::invoke(function (MysqlObject $mysqlObject) {
@@ -36,7 +39,7 @@ class IndexController extends AdminBaseController
 //        $this->response()->write($this->fetch('index/index.html'));
 //	    //		$this->response()->write('hello easySwoole');
 //        Render::getInstance()->restartWorker();
-        $this->response()->write(Render::getInstance()->render('index/index.html'));
+//        $this->response()->write(Render::getInstance()->render('index/index.html'));
 //
 //        $this->response()->write(Smarty::getInstance()->render('index/index.html',[
 //            'user'=>'easyswoole',

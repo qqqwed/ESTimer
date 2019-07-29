@@ -76,9 +76,13 @@ class TaskManager
     {
         $start_time = microtime(true);
         $create_time = date('Y-m-d H:i:s');
-        exec($task['cmd']);
+//        $task['cmd'] = 'php easyswoole demo';
+        $res = \co::exec($task['cmd']);
+        Logger::getInstance()->log('执行情况'.json_encode($res));
+//        exec($task['cmd']);
         $end_time = microtime(true);
         $spend_time = $end_time - $start_time;
+        Logger::getInstance()->log('执行时间'.$spend_time);
         TaskManager::log($task, $create_time, $spend_time);
     }
 

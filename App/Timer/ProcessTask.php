@@ -27,6 +27,7 @@ class ProcessTask extends AbstractAsyncTask
      */
     protected function run($taskData, $taskId, $fromWorkerId, $flags = null)
     {
+        Logger::getInstance()->log('收到任务');
         Logger::getInstance()->log('开始执行任务'.print_r($taskData,true));
         TaskManager::exec($taskData);
         return true;

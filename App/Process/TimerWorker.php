@@ -35,7 +35,6 @@ class TimerWorker extends AbstractProcess
             $wheel = new TimingWheel();
             TaskManager::isChange(true);
             \EasySwoole\Component\Timer::getInstance()->loop(1 * 1000, function() use($wheel) {
-//                $now = TaskManager::$nowTime;
                 $now = Cache::getInstance()->get('nowTimestamp');
 
                 if(TaskManager::isChange()){
@@ -66,22 +65,15 @@ class TimerWorker extends AbstractProcess
                         Logger::getInstance()->log('$interval：'.$interval);
                         $wheel->add($interval,$task);
                         Logger::getInstance()->log('这是要执行的任务'. json_encode($task, JSON_UNESCAPED_UNICODE));
+                        Logger::getInstance()->log('准备投递任务');
 
                         $taskClass = new ProcessTask($task);
                         \EasySwoole\EasySwoole\Swoole\Task\TaskManager::processAsync($taskClass);
-                        //                    $worker->task($task);
                     }
                 }
-//                TaskManager::tick();
                 Cache::getInstance()->set('nowTimestamp', time());
             });
-//            TaskManager::tick();
-//
-//            Timer::tick(1*1000, function() use ($wheel) {
-//
-//            });
-//            TaskManager::tick();
-        });
+    });
 
 
     }

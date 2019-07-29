@@ -59,11 +59,16 @@ class EasySwooleEvent implements Event
 
     public static function mainServerCreate(EventRegister $register)
     {
-		/**
-		 * **************** 热重载进程 ****************
-		 */
-		$swooleServer = ServerManager::getInstance()->getSwooleServer();
-		$swooleServer->addProcess((new HotReload('HotReload', ['disableInotify' => false]))->getProcess());
+        /**
+         * **************** 热重载进程 ****************
+         */
+        $swooleServer = ServerManager::getInstance()->getSwooleServer();
+        $swooleServer->addProcess((new HotReload('HotReload', ['disableInotify' => false]))->getProcess());
+        /**
+         * **************** FastCache 快速缓存 ****************
+         */
+        Cache::getInstance()->setTempDir(EASYSWOOLE_TEMP_DIR)->attachToServer(ServerManager::getInstance()->getSwooleServer());
+
         /**
          * **************** 自定义进程 ****************
          */
@@ -88,46 +93,6 @@ class EasySwooleEvent implements Event
 		// 开始一个定时任务计划
 //		Crontab::getInstance()->addTask(TaskTwo::class);
 
-        /**
-         * **************** FastCache 快速缓存 ****************
-         */
-        // 每隔5秒将数据存回文件
-        Cache::getInstance()->setTickInterval(5 * 1000);//设置定时频率
-        Cache::getInstance()->setOnTick(function (SyncData $SyncData, CacheProcessConfig $cacheProcessConfig) {
-            $data = [
-                'data'  => $SyncData->getArray(),
-                'queue' => $SyncData->getQueueArray(),
-                'ttl'   => $SyncData->getTtlKeys(),
-            ];
-            $path = EASYSWOOLE_TEMP_DIR . '/FastCacheData/' . $cacheProcessConfig->getProcessName();
-            File::createFile($path,serialize($data));
-        });
-
-        // 启动时将存回的文件重新写入
-        Cache::getInstance()->setOnStart(function (CacheProcessConfig $cacheProcessConfig) {
-            $path = EASYSWOOLE_TEMP_DIR . '/FastCacheData/' . $cacheProcessConfig->getProcessName();
-            if(is_file($path)){
-                $data = unserialize(file_get_contents($path));
-                $syncData = new SyncData();
-                $syncData->setArray($data['data']);
-                $syncData->setQueueArray($data['queue']);
-                $syncData->setTtlKeys(($data['ttl']));
-                return $syncData;
-            }
-        });
-
-        // 在守护进程时,php easyswoole stop 时会调用,落地数据
-        Cache::getInstance()->setOnShutdown(function (SyncData $SyncData, CacheProcessConfig $cacheProcessConfig) {
-            $data = [
-                'data'  => $SyncData->getArray(),
-                'queue' => $SyncData->getQueueArray(),
-                'ttl'   => $SyncData->getTtlKeys(),
-            ];
-            $path = EASYSWOOLE_TEMP_DIR . '/FastCacheData/' . $cacheProcessConfig->getProcessName();
-            File::createFile($path,serialize($data));
-        });
-
-        Cache::getInstance()->setTempDir(EASYSWOOLE_TEMP_DIR)->attachToServer(ServerManager::getInstance()->getSwooleServer());
 
         /**
          * **************** 配置Smarty渲染器 ****************

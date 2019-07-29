@@ -13,6 +13,7 @@ use App\Logic\DemoLogic;
 use EasySwoole\EasySwoole\Command\CommandInterface;
 use EasySwoole\EasySwoole\Command\Utility;
 use EasySwoole\EasySwoole\Logger;
+use Swoole\Timer;
 
 class Demo implements CommandInterface
 {
@@ -24,12 +25,10 @@ class Demo implements CommandInterface
 
 	public function exec(array $args): ?string
 	{
-		//打印参数,打印测试值
-		var_dump($args);
-		echo 'test'.PHP_EOL;
 		Logger::getInstance()->log('commond:demo的逻辑'.date('Y-m-d h:i:s'));
 		$demoLogic = new DemoLogic();
 		$demoLogic->updateGoodsTime();
+        Timer::clearAll();
 		return null;
 	}
 
