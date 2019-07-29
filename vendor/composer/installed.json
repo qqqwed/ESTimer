@@ -525,17 +525,17 @@
     },
     {
         "name": "easyswoole/phpunit",
-        "version": "1.0.6",
-        "version_normalized": "1.0.6.0",
+        "version": "1.0.7",
+        "version_normalized": "1.0.7.0",
         "source": {
             "type": "git",
             "url": "https://github.com/easy-swoole/phpunit.git",
-            "reference": "6798642d97a423ab91683db491f440159a01806d"
+            "reference": "9dcbd763186a746e2d5b59110a060e1968244152"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/easy-swoole/phpunit/zipball/6798642d97a423ab91683db491f440159a01806d",
-            "reference": "6798642d97a423ab91683db491f440159a01806d",
+            "url": "https://api.github.com/repos/easy-swoole/phpunit/zipball/9dcbd763186a746e2d5b59110a060e1968244152",
+            "reference": "9dcbd763186a746e2d5b59110a060e1968244152",
             "shasum": "",
             "mirrors": [
                 {
@@ -548,12 +548,17 @@
             "ext-swoole": "^4.4.0",
             "phpunit/phpunit": "^7.5"
         },
-        "time": "2019-07-12T15:55:07+00:00",
+        "time": "2019-07-28T15:36:45+00:00",
         "bin": [
             "bin/co-phpunit"
         ],
         "type": "library",
         "installation-source": "dist",
+        "autoload": {
+            "psr-4": {
+                "EasySwoole\\Phpunit\\": "src/"
+            }
+        },
         "notification-url": "https://packagist.org/downloads/",
         "license": [
             "Apache-2.0"
@@ -637,17 +642,17 @@
     },
     {
         "name": "easyswoole/session",
-        "version": "1.0.0",
-        "version_normalized": "1.0.0.0",
+        "version": "1.0.1",
+        "version_normalized": "1.0.1.0",
         "source": {
             "type": "git",
             "url": "https://github.com/easy-swoole/session.git",
-            "reference": "9a0b8168f2806978b6c73cee57dc3e298a87b8a4"
+            "reference": "385466fc99179f0d4fe7dd0ca403df592d99719d"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/easy-swoole/session/zipball/9a0b8168f2806978b6c73cee57dc3e298a87b8a4",
-            "reference": "9a0b8168f2806978b6c73cee57dc3e298a87b8a4",
+            "url": "https://api.github.com/repos/easy-swoole/session/zipball/385466fc99179f0d4fe7dd0ca403df592d99719d",
+            "reference": "385466fc99179f0d4fe7dd0ca403df592d99719d",
             "shasum": "",
             "mirrors": [
                 {
@@ -663,7 +668,7 @@
         "require-dev": {
             "easyswoole/swoole-ide-helper": "^1.2"
         },
-        "time": "2019-06-16T05:36:15+00:00",
+        "time": "2019-07-28T12:50:22+00:00",
         "type": "library",
         "installation-source": "dist",
         "autoload": {

@@ -52,6 +52,7 @@ class ComposerStaticInit920735c004bfc64aa1d170d049795ff5
             'EasySwoole\\Session\\' => 19,
             'EasySwoole\\Rpc\\Test\\' => 20,
             'EasySwoole\\Rpc\\' => 15,
+            'EasySwoole\\Phpunit\\' => 19,
             'EasySwoole\\Mysqli\\' => 18,
             'EasySwoole\\Log\\' => 15,
             'EasySwoole\\Http\\' => 16,
@@ -155,6 +156,10 @@ class ComposerStaticInit920735c004bfc64aa1d170d049795ff5
         'EasySwoole\\Rpc\\' => 
         array (
             0 => __DIR__ . '/..' . '/easyswoole/rpc/src',
+        ),
+        'EasySwoole\\Phpunit\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/easyswoole/phpunit/src',
         ),
         'EasySwoole\\Mysqli\\' => 
         array (

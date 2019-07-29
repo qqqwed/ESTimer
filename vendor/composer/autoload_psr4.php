@@ -25,6 +25,7 @@ return array(
     'EasySwoole\\Session\\' => array($vendorDir . '/easyswoole/session/src'),
     'EasySwoole\\Rpc\\Test\\' => array($vendorDir . '/easyswoole/rpc/test'),
     'EasySwoole\\Rpc\\' => array($vendorDir . '/easyswoole/rpc/src'),
+    'EasySwoole\\Phpunit\\' => array($vendorDir . '/easyswoole/phpunit/src'),
     'EasySwoole\\Mysqli\\' => array($vendorDir . '/easyswoole/mysqli/src'),
     'EasySwoole\\Log\\' => array($vendorDir . '/easyswoole/log/src'),
     'EasySwoole\\Http\\' => array($vendorDir . '/easyswoole/http/src'),
