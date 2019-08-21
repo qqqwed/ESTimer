@@ -1,5 +1,7 @@
 # ESTimer（开发中）
 基于easyswoole + layui 的毫秒级异步定时任务管理
+##TODO:
+当前版本下 脚本的监控执行已完成,视图界面待开发
 ## EasySwoole运行步骤
 
 EasySwoole的框架运行步骤大概为以下几步:
